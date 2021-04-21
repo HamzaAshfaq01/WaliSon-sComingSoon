@@ -1,11 +1,50 @@
+import React, { useEffect, useState } from 'react';
 import Logo from './assets/logo.png';
 import './App.css';
-import React from 'react';
 
 function App() {
-  React.useEffect(() => {
-    allFunctionality();
-  }, []);
+  const calculateTimeLeft = () => {
+    let year = new Date().getFullYear();
+    const difference = +new Date(`${year}-5-23`) - +new Date();
+
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [year] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval) => {
+    if (!timeLeft[interval]) {
+      return;
+    }
+
+    timerComponents.push(
+      <span>
+        {timeLeft[interval]} {interval}{' '}
+      </span>
+    );
+  });
+  const { days } = timerComponents;
+  console.log(timerComponents[3].props.children);
   return (
     <div className='App'>
       <div>
@@ -18,19 +57,32 @@ function App() {
         </figure>
         <div className='row clock' id='clockdiv'>
           <div className='col-3 d-flex flex-column align-items-center'>
-            <h1 className='m-0 p-0 days'>00</h1>
+            <h1 className='m-0 p-0 days'>
+              {timerComponents && timerComponents[0].props.children[0]}
+            </h1>
             <small>Days</small>
           </div>
           <div className='col-3 d-flex flex-column align-items-center'>
-            <h1 className='m-0 p-0 hours'>16</h1>
+            <h1 className='m-0 p-0 hours'>
+              {' '}
+              {timerComponents && timerComponents[1].props.children[0]}
+            </h1>
             <small>Hours</small>
           </div>
           <div className='col-3  d-flex flex-column align-items-center'>
-            <h1 className='m-0 p-0 minutes'>07</h1>
+            <h1 className='m-0 p-0 minutes'>
+              {' '}
+              {timerComponents && timerComponents[2].props.children[0]}
+            </h1>
             <small>Min</small>
           </div>
           <div className='col-3  d-flex flex-column align-items-center'>
-            <h1 className='m-0 p-0 seconds'>23</h1>
+            <h1 className='m-0 p-0 seconds'>
+              {' '}
+              {timerComponents[3].props.children[0] < 1
+                ? '00'
+                : timerComponents[3].props.children[0]}
+            </h1>
             <small>Sec</small>
           </div>
         </div>
@@ -47,48 +99,3 @@ function App() {
 }
 
 export default App;
-
-const allFunctionality = () => {
-  function getTimeRemaining(endtime) {
-    const total = Date.parse(endtime) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-
-    return {
-      total,
-      days,
-      hours,
-      minutes,
-      seconds,
-    };
-  }
-
-  function initializeClock(id, endtime) {
-    const daysSpan = document.querySelector('.days');
-    const hoursSpan = document.querySelector('.hours');
-    const minutesSpan = document.querySelector('.minutes');
-    const secondsSpan = document.querySelector('.seconds');
-
-    function updateClock() {
-      const t = getTimeRemaining(endtime);
-
-      daysSpan.innerHTML = t.days;
-      hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-      secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-      if (t.total <= 0) {
-        clearInterval(timeinterval);
-      }
-    }
-
-    updateClock();
-    const timeinterval = setInterval(updateClock, 1000);
-  }
-
-  const deadline = new Date(Date.parse(new Date()) + 32 * 24 * 60 * 60 * 1000);
-  console.log(deadline);
-  initializeClock('clockdiv', deadline);
-};
