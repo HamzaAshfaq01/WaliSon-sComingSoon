@@ -43,8 +43,9 @@ function App() {
       </span>
     );
   });
-  const { days } = timerComponents;
-  console.log(timerComponents[3].props.children);
+  // console.log(timerComponents[3].props.children);
+  console.log(timerComponents[3]);
+  // console.log(timerComponents[3].pr  ops.children.length < 1);
   return (
     <div className='App'>
       <div>
@@ -58,30 +59,28 @@ function App() {
         <div className='row clock' id='clockdiv'>
           <div className='col-3 d-flex flex-column align-items-center'>
             <h1 className='m-0 p-0 days'>
-              {timerComponents && timerComponents[0].props.children[0]}
+              {timerComponents[0] && timerComponents[0].props.children[0]}
             </h1>
             <small>Days</small>
           </div>
           <div className='col-3 d-flex flex-column align-items-center'>
             <h1 className='m-0 p-0 hours'>
               {' '}
-              {timerComponents && timerComponents[1].props.children[0]}
+              {timerComponents[1] && timerComponents[1].props.children[0]}
             </h1>
             <small>Hours</small>
           </div>
           <div className='col-3  d-flex flex-column align-items-center'>
             <h1 className='m-0 p-0 minutes'>
               {' '}
-              {timerComponents && timerComponents[2].props.children[0]}
+              {timerComponents[2] && timerComponents[2].props.children[0]}
             </h1>
             <small>Min</small>
           </div>
           <div className='col-3  d-flex flex-column align-items-center'>
             <h1 className='m-0 p-0 seconds'>
               {' '}
-              {timerComponents[3].props.children[0] < 1
-                ? '00'
-                : timerComponents[3].props.children[0]}
+              {timerComponents[3] ? timerComponents[3].props.children[0] : '00'}
             </h1>
             <small>Sec</small>
           </div>
