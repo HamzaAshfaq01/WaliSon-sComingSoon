@@ -43,9 +43,7 @@ function App() {
       </span>
     );
   });
-  // console.log(timerComponents[3].props.children);
-  console.log(timerComponents[3]);
-  // console.log(timerComponents[3].pr  ops.children.length < 1);
+ 
   return (
     <div className='App'>
       <div>
