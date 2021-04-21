@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline: none;
+}
+html {
+  font-size: 62.5%;
+}
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+
+.App figure {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.App figure img {
+  width: 140px;
+  height: 140px;
+  margin-left: -20px;
+}
+.App figure figcaption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-left: -60px;
+  margin-bottom: 13px;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  color: rgb(0, 255, 234);
+}
+.App small {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: white;
+}
+.App h1 {
+  font-size: 5rem;
+  color: rgb(0, 255, 234);
+}
+.App h2 {
+  padding: 20px 0;
+  font-size: 3rem;
+  text-align: center;
+  color: rgb(0, 255, 234);
+}
+.clock {
+  margin-left: 50px;
+}
+
+.App h3 {
+  text-align: center;
+  color: rgb(0, 255, 234);
+  display: flex;
+  font-size: 3rem;
+
+  justify-content: center;
+}
+
+.App a {
+  margin-left: 10px;
+  border-radius: 50%;
+  color: #39b54a;
+  margin-bottom: 20px;
+  font-size: 20px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.2),
+    2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+  position: relative;
+}
+.App a::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: 3px;
+  bottom: 3px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  background-color: #39b54a;
+}
+.App a .fab {
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.App a:hover {
+  color: #39b54a;
+  transform: translateY(-10px);
+  box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.2),
+    2px 24px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 42%;
+  }
+}
